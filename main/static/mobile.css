@@ -1,0 +1,72 @@
+@media screen and (max-width:700px){
+    nav{
+        width: 0px;
+        position: absolute;
+        z-index: 2000;
+        overflow: hidden;
+        padding: 0;
+        display: none;
+    }
+    .container{
+        width: 100%;
+        scale:1;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .ham{
+        display: block;
+    }
+}
+@media screen and (max-width:450px){
+    nav{
+        width: 0px;
+        position: absolute;
+        z-index: 2000;
+        overflow: hidden;
+        padding: 0;
+        display: none;
+    }
+    .container{
+        width: 100%;
+        scale:0.9;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 50px;
+    }
+    .ham{
+        display: block;
+    }
+    @keyframes map_down {
+        0%{transform:perspective(1000px) rotateY(0deg) translateZ(0px);}
+        50%{transform:perspective(1000px) rotateY(70deg) translateZ(0px);}
+        100%{transform:perspective(1000px) rotateY(70deg) translateZ(600px);}
+    }
+    @keyframes map_up {
+        0%{transform:perspective(1000px) rotateY(0deg) translateZ(0px);}
+        50%{transform:perspective(1000px) rotateY(70deg) translateZ(0px);}
+        100%{transform:perspective(1000px) rotateY(70deg) translateZ(-600px);}
+    }
+}
+@media screen and (max-width:390px){
+    nav{
+        width: 0px;
+        position: absolute;
+        z-index: 2000;
+        overflow: hidden;
+        padding: 0;
+        display: none;
+    }
+    .container{
+        width: 100%;
+        scale:0.85;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 50px;
+    }
+    .ham{
+        display: block;
+    }
+    #home{
+        margin-left: calc(100vw - 385px);
+    }
+}

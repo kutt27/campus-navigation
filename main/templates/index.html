@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/mobile.css">
+    <script src="static/main.js"></script>
+</head>
+
+<body>
+    <div class="topbar">
+        <button class="ham" onclick="ham()"> ☰ </button>
+        <img src="static/images/name.jpg"/>
+        <img src="static/images/logo.jpg" class="logo"/>
+    </div>
+    <nav id="nav">
+        <h3>name</h3>
+        <a id="h" onclick="nav(this,'home')"><img src="static/images/home.png"/>Home</a>
+        <a id="u" onclick="nav(this,'report')"><img src="static/images/map.png"/>Find Class</a>
+        <a id="a" onclick="nav(this,'about')"><img src="static/images/about.png"/>About Us</a>
+        <a id="l" onclick="window.location.href='/static/log.html'"><img src="static/images/log.png"/>Logout</a>
+    </nav>
+
+    <div class="container">
+        <div id="home" style="display: flex;">
+            <span>
+            <div class="upload" id="upload">
+                 {% csrf_token %} 
+                <div class="search">
+                    <img src="static/images/search.png" onclick="nav(document.getElementById('u'),'report'),srol(500,'report') ,navigate('porch',document.getElementById('search').value)"/>
+                    <input type="search" id="search" onkeyup="autocomp('search','search_result')"  placeholder="Search for class,teachers,..."/>
+                    <div class="search_result" id="search_result"></div>
+                </div>
+                <h3>explore classes</h3>
+                <span style="display: flex; justify-content: space-between;">
+                <div class="explore">
+                        <h4>Computer Lab</h4>
+                        <h5>Mrs. Ameena M Aliyar</h5>
+                        <button onclick="nav(document.getElementById('u'),'report'),srol(500,'report') ,navigate('porch','com lab')">Navigate</button>
+                </div>
+                <div class="explore">
+                    <h4>S8 Civil</h4>
+                    <h5>Mrs. Aleena Rahman</h5>
+                    <button onclick="nav(document.getElementById('u'),'report'),srol(500,'report') ,navigate('porch','s8 civil')">Navigate</button>
+                </div>
+                </span>
+                <h3>Staff Directory</h3>
+
+                <div class="teachers" onclick="srol(500,'home'),teacherinfo(1)">
+                    <img src="/static/images/aleena.jpeg"/>
+                    <span>
+                        <h5>Mrs. Aleena Rahman</h5>
+                        <p>Civil Department</p>
+                    </span>
+                    <img src="/static/images/Grey arrow.png" class="arrow"/>
+                </div> 
+                <div class="teachers" onclick="srol(500,'home'),teacherinfo(0)">
+                    <img src="/static/images/ameena.jpeg"/>
+                    <span>
+                        <h5>Mrs. Ameena M Aliyar</h5>
+                        <p>Computer Science Department</p>
+                    </span>
+                    <img src="/static/images/Grey arrow.png" class="arrow"/>
+                </div> 
+                
+            </div>
+            <div class="people" id="peoples">
+                <button class="back" onclick="srol(-500,'home')"><</button>
+                <img id="teach_img" src=""/>
+                <h3 id="teach_name"></h3>
+                <h4 id="teach_pos"></h4>
+            <div class="personal_info">
+                <h5>General Information</h5>
+                <p id="name"></p>
+                <p id="Age"></p>
+                <p id="email"></p>
+                <p id="phone"></p>
+                <p id="dept"></p>
+            </div>
+            <!-- <div class="education">
+                <h5>Experience</h5>
+                <p id="btech">Lecturer | iit kanpur<br>
+                    <b>Jnuary 2002 - march 2005</b>
+                </p>
+                <p id="btech">assitant professor<br><b>march 2003 - january 2005</b></p>
+            </div> -->
+            <button class="navig" onclick="nav(document.getElementById('u'),'report'),srol(500,'report')">Navigate</button>
+            
+            </div>
+            </span>
+        </div>
+
+
+        <div class="report" id="report" style="display: none;">
+            <span>
+            <div class="nav_info" id="location">
+                <h4>Find class</h4>
+                <label for="from">Enter Current location : <div class="from_result" id="from_result"></div></label>
+                <input type="text" onkeyup="autocomp('from','from_result')"  id="from" class="from" placeholder="Type 'Porch'" required/>
+                <label for="to">Enter Destination : <div class="to_result" id="to_result"></div></label>
+                <input type="text" onkeyup="autocomp('to','to_result')" id="to" class="to" placeholder="Type 'S6-ECE'"  required/>
+                <button onclick="locate()">Navigate</button>
+            </div>
+            <div class="maps">
+                <button onclick="srol(-500,'report')"><b><</b> <p>Navigation</p></button>
+                <p id="floor_num"></p>
+                <div class="map1">  
+                    <svg id="ground" style="display: none;">
+                        <image height='100%' width='100%' href='/static/ground.svg'></image>     
+                    </svg>
+                    <svg id="floor-1" style="display: none;">     
+                        <image height='100%' width='100%' href='/static/floor_1.svg'></image>  
+                    </svg>
+                    <svg id="floor-2" style="display: none;">   
+                        <image height='100%' width='100%' href='/static/floor_2.svg'></image>    
+                    </svg>                
+                </div>
+            </div>
+            </span>
+        </div>
+
+
+        <div class="about" id="about" style="display: none;">
+            <h1>About us</h1>
+            <p><b>Campus Nav</b> is an innovative website designed specifically for college students to seamlessly <b>Navigate their Campus.</b>
+                Helping students find lecture halls, libraries, cafeterias, dormitories, and other essential locations</p>
+            <h2>Group Members</h2>
+            <h3>Alen Sibish</h3>
+            <h3>Anakha S</h3>
+            <h3>Arsha</h3>
+            <h3>Devanand</h3>
+            <h2>Key Features:</h2>
+            <h4>Graph-based Navigation</h4>
+            <p> The system utilizes a graph data structure to model the campus layout, with locations represented as nodes and pathways as edges.
+             </p>   <h4>Efficient Pathfinding:</h4>
+                <p> Leveraging <b>Dijkstra's algorithm</b>, the Navigator efficiently calculates the shortest path between two points on campus.
+            </p>
+                <h4>Location-aware Routing</h4>
+                <p>Users can input their current location and desired destination, and the system provides step-by-step directions to reach the target location.
+            </p>
+                    <h4>Customizable</h4>
+               <p> The Navigator allows for easy addition of new locations and connections, making it<b> adaptable to changes</b> in campus infrastructure.
+                </p>
+                <h2>How it Works</h2>
+                
+               <p> <b>Initialization:</b> Upon initialization, the Navigator constructs a graph representing the campus layout, with nodes representing key locations and edges representing pathways between them.
+               </p>
+               <p><b>Pathfinding:</b> Users can request navigation between any two points on campus. The system employs Dijkstra's algorithm to find the shortest path, considering factors such as distance and floor level.
+                </p>
+                <p><b>Distance Calculation:</b> To estimate travel time, the Navigator calculates the distance between consecutive nodes along the path and factors in an average walking speed.
+                </p>
+                  <p><b> Output:</b> Users receive clear directions and estimated travel time to their destination, facilitating efficient navigation across the campus.
+                </p>
+               <h2>Future Enhancements:</h2>
+                
+                <p><b>Integration with Mobile Apps:</b> The Navigator can be integrated into mobile applications, providing on-the-go navigation for students and visitors.
+                </p>
+                <p> <b>Real-time Updates:</b> Incorporating real-time data on campus events, closures, and crowd density can enhance the accuracy and effectiveness of navigation suggestions.
+                </p>
+                 <p><b>Accessibility Features:</b> Implementing features such as wheelchair-accessible routes and audio-based navigation can cater to the diverse needs of campus users.
+                </p>
+                <h2>Conclusion:</h2>
+                
+               <p> The Campus Navigator offers an intuitive solution to the common challenge of navigating large college campuses. By leveraging graph-based algorithms and user-friendly interfaces, it aims to streamline campus exploration and enhance the overall student experience.
+            </p>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
